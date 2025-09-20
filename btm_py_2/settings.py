@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xr8pgu8&vofbg5-pgj(fqgm(73p#v&ltr&bv0rlhq44^3bw0v*'
+SECRET_KEY = 'your_secret_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,8 +50,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 
-RECAPTCHA_PUBLIC_KEY = '6Lf6rI8rAAAAAMgFZW37dQO6tC2ZTgIVwWoPoxFB'
-RECAPTCHA_PRIVATE_KEY = '6Lf6rI8rAAAAAAcJhleg-S2P0C1JKgmsdAJxw2Z9'
+RECAPTCHA_PUBLIC_KEY = 'your_key'
+RECAPTCHA_PRIVATE_KEY = 'your_key'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,7 +149,7 @@ EMAIL_HOST = 'smtp.gmail.com' #for Gmail
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pramodr2101@gmail.com'
-EMAIL_HOST_PASSWORD = 'elsc lfdu etne fdwe'    # App-Specific password
+EMAIL_HOST_PASSWORD = 'your password    # App-Specific password
 DEFAULT_FROM_EMAIL = 'pramodr2101@gmail.com'
 
 
