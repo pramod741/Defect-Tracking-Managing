@@ -1,0 +1,18 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Update Your Profile</h1>
+        <form action="{% url 'update' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ form1.as_p }}
+            <input type="submit" value="UPDATE" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

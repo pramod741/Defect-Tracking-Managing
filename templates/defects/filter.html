@@ -1,0 +1,64 @@
+{% extends 'defects/base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Filter</h1>
+        <form action="{% url 'filter' %}" method="POST">
+            {% csrf_token %}
+            <label for="">Developers: </label>
+            <select name="devname" id="">
+                {% for dev in developers %}
+                {% comment %}<option value="{{dev.id}}">{{dev.dev_name}}</option>{% endcomment %}
+                <option value="{{dev.dev_name }}">{{dev.dev_name}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+
+        <br><br>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Defect ID</th>
+                    <th scope="col">Defect Name</th>
+                    <th scope="col">Assigned By</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in defects %}
+                <tr class="{% if d.defect_status == 'completed' %}table-success{% endif %}">
+                    <th scope="row">{{ d.defect_id }}</th>
+                    <!-- <td></td> -->
+                    <td>{{ d.defect_name }}</td>
+                    <td>{{ d.assigned_by }}</td>
+                    <td>{{ d.assigned_to }}</td>
+                    <td><a href="{{d.id}}">more info</a></td>
+                    <!-- <td><a href="{% url 'description' d.id %}">more info</a></td> -->
+                    <td>{{ d.defect_status }}</td>
+                    <td>{{ d.assigned_date }}</td>
+                    {% if d.priority == 'high'%}
+                    <td style="text-align: center;"><i class="bi bi-bell"></i></td>
+                    {% elif d.priority == 'medium'%}
+                    <td style="text-align: center;"><i class="bi bi-hypnotize"></i></td>
+                    {% elif d.priority == 'low'%}
+                    <td style="text-align: center;"><i class="bi bi-arrow-down-short"></i></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}

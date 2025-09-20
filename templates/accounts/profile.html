@@ -1,0 +1,62 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1 style="text-align: center;">{{user.username}}'s Profile</h1>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-body">
+                    <p>Email: {{user.email}}</p>
+                    <p>Door no: {{user.userdetails.Door_no}}</p>
+                    <p>Street: {{user.userdetails.street}}</p>
+                    <p>city: {{user.userdetails.city}}</p>
+                    <p>State: {{user.userdetails.state}}</p>
+                    <p>Zipcode: {{user.userdetails.zipcode}}</p>
+                    <br>
+                    <a href="{% url 'update' %}" class="btn btn-primary">Update</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-body" style="border-radius: 50%;">
+                    {% if user.userdetails.profile_pic %}
+                    <img src="{{user.userdetails.profile_pic.url}}" alt="" style="border-radius: 50%; height:300px; width:500px">
+                    {% else %}
+                    <p>No image</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if is_developer %}
+<br><br>
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-body">
+                    <h4>Total Defects assigned</h4>
+                    <h6 style="font-size: xx-large; text-align:center;">{{defect_count}}</h6>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-body">
+                    <h4>Completed Defects</h4>
+                    <h6 style="font-size: xx-large; text-align:center;">{{completed}}</h6>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-body">
+                    <h4>Pending Defects</h4>
+                    <h6 style="font-size: xx-large; text-align:center;">{{pending}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% endif %}
+
+{% endblock %}

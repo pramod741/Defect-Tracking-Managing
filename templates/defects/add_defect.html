@@ -1,0 +1,16 @@
+{% extends 'defects/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>ADD defect page</h1>
+        <form action="{% url 'add' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="ADD" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

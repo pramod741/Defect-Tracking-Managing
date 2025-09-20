@@ -1,0 +1,17 @@
+{% extends 'defects/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Edit Defect Form</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="EDIT">
+            <br><br>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

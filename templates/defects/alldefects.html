@@ -1,0 +1,90 @@
+{% extends 'defects/base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="jumbotron">
+        <h1>List of Defects</h1>
+        <h5 style="text-align: right;">Total Defects : {{defects_count}}</h5>
+        <!-- <div style="padding: 5px 15px; background-color: gray; color: white; border-radius: 5px;">{{defects|length}}</div> -->
+        <a href="{% url 'filter' %}" class="btn btn-primary">Filter</a>
+        <br><br>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Defect ID</th>
+                    <th scope="col">Defect Name</th>
+                    <th scope="col">Assigned By</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Priority</th>
+                    {% if show_button %}
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in defects %}
+                <tr>
+                    <th scope="row">{{ d.defect_id }}</th>
+                    <!-- <td></td> -->
+                    <td>{{ d.defect_name }}</td>
+                    <td>{{ d.assigned_by }}</td>
+                    <td>{{ d.assigned_to }}</td>
+                    <td><a href="{{d.id}}">more info</a></td>
+                    <!-- <td><a href="{% url 'description' d.id %}">more info</a></td> -->
+                    <td>{{ d.defect_status }}</td>
+                    <td>{{ d.assigned_date }}</td>
+                    {% if d.priority == 'high'%}
+                    <td style="text-align: center;"><i class="bi bi-bell"></i></td>
+                    {% elif d.priority == 'medium'%}
+                    <td style="text-align: center;"><i class="bi bi-hypnotize"></i></td>
+                    {% elif d.priority == 'low'%}
+                    <td style="text-align: center;"><i class="bi bi-arrow-down-short"></i></td>
+                    {% endif %}
+                    {% if show_button %}
+                    <td style="text-align: center;"><a href="{% url 'edit' id=d.id %}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td style="text-align: center;"><i class="bi bi-trash3"></i></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if show_button %}
+        <a href="{% url 'add' %}" class="btn btn-primary">ADD</a>
+        {% endif %}
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="...">
+                <ul class="pagination justify-content-center">
+                    {% comment %}<li class="page-item disabled"> </li>{% endcomment %}
+                    <li class="page-item">
+                        <a class="page-link" href="?pg=1">&lt;&lt;</a>
+                    </li>
+                    {% if defects.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?pg={{defects.previous_page_number}}">{{defects.previous_page_number}}</a></li>
+                    {% endif %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?pg={{defects.number}}" aria-current="page">{{defects.number}}</a>
+                    </li>
+                    {% if defects.has_next %}
+                    <li class="page-item"><a class="page-link" href="?pg={{defects.next_page_number}}">{{defects.next_page_number}}</a></li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="?pg={{ defects.paginator.num_pages }}">&gt;&gt;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
